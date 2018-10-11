@@ -24,8 +24,12 @@ tr:nth-child(even) {
     background-color: #f6f3f3;
 }
 
-th {
-	width: 33.3%;
+th:first-child {
+	width: 30%;
+}
+
+th:last-child {
+	width: 20%;
 }
 
 button {
@@ -55,9 +59,8 @@ button:hover {
 }
 
 .sort {
-	padding: 1px 5px;
+	padding: 0 15px;
 	background-color: #f6f3f3;
 	border-radius: 3px;
-	float: right;
-	margin-right: 50%;
+	margin-left: 15px;
 }

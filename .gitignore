@@ -9,9 +9,6 @@
 # production
 /build
 
-# with beckend
-/src2
-
 # misc
 .DS_Store
 .env.local

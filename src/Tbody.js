@@ -6,7 +6,7 @@ class Tbody extends Component {
 			<tbody>
 				{this.props.hotels.map(hotel => {
 					return (
-							<tr key={hotel.id}>
+							<tr key={hotel.hotel_id}>
 								<td>{hotel.name}</td>
 								<td>{hotel.address}</td>
 								<td>{hotel.price}</td>
