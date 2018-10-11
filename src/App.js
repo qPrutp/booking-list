@@ -11,14 +11,18 @@ class App extends Component {
       name: false,
       address: false,
       price: false,
-      currentPage: 1,
-      stepTable: 5,
-      hotelsFromServer: [],
-      dataShow: []
+      hotelsFromServer: []
     }
   }
 
   refreshDataFromServer = () => {
+    this.setState({
+      name: false,
+      address: false,
+      price: false,
+      hotelsFromServer: []
+    });
+    
     getHotelsFromServer().then((hotels) => {
       this.setState({ hotelsFromServer: hotels });
     }).catch((error) => {
@@ -28,8 +32,6 @@ class App extends Component {
 
   componentDidMount() {
     this.refreshDataFromServer();
-
-
   }
 
   sortList(i) {
@@ -68,35 +70,8 @@ class App extends Component {
     }
   }
 
-  loadData() {
-    const {name,address,price,current} = this.state;
-    fetch(`http://localhost/booking-list/api/test.php`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: name,
-        address: address,
-        price: price,
-        current: current
-      })
-    }).then((response) => response.json())
-      .then((responseJson) => {
-        alert(responseJson);
-      }).catch((error) => {
-        console.log(error);
-      });
-  }
-
-  newPage(i) {
-    console.log(i);
-  }
-
   render() {
-    const { currentPage, stepTable, hotelsFromServer, dataShow } = this.state;
-    let maxPage = Math.ceil(hotelsFromServer.length/stepTable);
+    const { hotelsFromServer } = this.state;
     const span = <span className="sort">&#9650;</span>;
     return (
       <div className="main">
@@ -118,18 +93,7 @@ class App extends Component {
               </th>
             </tr>
           </thead>
-          <Tbody hotels={dataShow} />
-          <tfoot>
-            <tr>
-              <td colSpan={3}>
-                <div className="tab-nav">
-                  <button onClick={() => this.newPage('prev')} >&#9668;</button>
-                  <span>&emsp;ст.:&nbsp;{currentPage}/{maxPage}&emsp;</span>
-                  <button onClick={() => this.newPage('next')} >&#9658;</button>
-                </div>
-              </td>
-            </tr>
-          </tfoot>
+          <Tbody hotels={hotelsFromServer} />
         </table>
       </div>
     );
